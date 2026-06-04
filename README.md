@@ -1,0 +1,32 @@
+# Unison Daily Hallucination Audit — Rolling Index
+
+**Production storefront:** https://unisonorchestration.com · **Live moat:** 91,703+ vectors · 32 collections  
+**Agent install:** `npx @smithery/cli run colbymahon/unison-orchestration-hub`
+
+Deterministic probes run nightly at 03:00 UTC by `benchmark_bot.py`.
+Fidelity Index = % of ground-truth tokens present in model response (temperature=0.0).
+Token Δ = TSV vs equivalent JSON payload overhead reduction (tiktoken cl100k_base).
+
+**Methodology:** Each probe targets a known hallucination failure mode in frontier models
+(Temporal-Context Conflation). The Unison gateway returns the primary source text;
+the model is probed without grounding context. A fidelity score of 0/100 means the
+model's ungrounded assertion did not contain any ground-truth tokens.
+
+| Date | `gpt-4o` | `gpt-4o-mini` | Token Δ |
+|---|---|---|---|
+| *(first automated run pending — workflow fires nightly at 03:00 UTC)* | — | — | — |
+
+---
+
+## Known Failure Modes (Confirmed 2026-06-02)
+
+| Probe ID | Collection | Question | GPT-4o Answer | Primary Source | Fidelity |
+|---|---|---|---|---|---|
+| ENG-001 | `unison_engineering_core` | Tesla 1891 AIEE operating frequency | ~150 kHz (Colorado Springs 1899 notebook) | 1,000,000 Hz (1891 AIEE lecture) | **0/100** |
+| MED-001 | `unison_medical_core` | Osler 1892 typhoid cold bath threshold | 103°F | **102°F** (Osler 1892, p.147) | **0/100** |
+
+*These errors compound. Every biotech pipeline citing the 103°F figure ships a 1°F clinical protocol deviation into production.*
+
+---
+
+*Source: [Storefront](https://unisonorchestration.com) · [AI plugin](https://unisonorchestration.com/.well-known/ai-plugin.json) · [MCP manifest](https://unison-edge-gateway.unisonorchestration.workers.dev/.well-known/mcp-configuration) · [Retriever](../integrations/langchain/unison_retriever.py) · [LangChain PR](../integrations/LANGCHAIN_PR_BLUEPRINT.md)*
