@@ -1,7 +1,7 @@
 # Unison Daily Hallucination Audit — Rolling Index
 
 **Production storefront:** https://unisonorchestration.com · **Live moat:** 91,703+ vectors · 32 collections  
-**Agent install:** `npx @smithery/cli run colbymahon/unison-orchestration-hub`
+**Agent install:** `npx @smithery/cli run crmendeavors/unison-orchestration-hub`
 
 Deterministic probes run nightly at 03:00 UTC by `benchmark_bot.py`.
 Fidelity Index = % of ground-truth tokens present in model response (temperature=0.0).
@@ -14,6 +14,7 @@ model's ungrounded assertion did not contain any ground-truth tokens.
 
 | Date | `gpt-4o` | `gpt-4o-mini` | Token Δ |
 |---|---|---|---|
+| [2026-06-05](benchmarks/reports/2026-06-05.md) **37.5/100** | **24.2/100** | -171.1% |
 | [2026-06-04](benchmarks/reports/2026-06-04.md) **37.5/100** | **24.2/100** | -171.1% |
 | [2026-06-04](benchmarks/reports/2026-06-04.md) **37.5/100** | **24.2/100** | -171.1% |
 | *(first automated run pending — workflow fires nightly at 03:00 UTC)* | — | — | — |
